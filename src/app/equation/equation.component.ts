@@ -26,7 +26,9 @@ export class EquationComponent implements OnInit {
     return this.mathForm.value.b;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.mathForm.statusChanges.subscribe((data) => console.log(data));
+  }
 
   randomNumber() {
     return Math.floor(Math.random() * 10);
