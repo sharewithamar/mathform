@@ -27,7 +27,26 @@ export class EquationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.mathForm.statusChanges.subscribe((data) => console.log(data));
+    this.mathForm.statusChanges.subscribe((value) => {
+      if (value === "INVALID") {
+        return;
+      }
+      /*  this.mathForm.controls.a.setValue(this.randomNumber());
+      this.mathForm.controls.b.setValue(this.randomNumber());
+      this.mathForm.controls.answer.setValue(""); */
+      // Note - use setValue on a from when you want to update all the controls on the form, else it will fail
+      this.mathForm.setValue({
+        a: this.randomNumber(),
+        b: this.randomNumber(),
+        answer: "",
+      });
+
+      //to update particular values
+      /*      this.mathForm.patchValue({
+        b: this.randomNumber(),
+        answer: "",
+      }); */
+    });
   }
 
   randomNumber() {
