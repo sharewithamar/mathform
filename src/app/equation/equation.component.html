@@ -1,13 +1,15 @@
-<form [formGroup]="mathForm">
-  {{ a }} + {{ b }} =
+<div class="container">
+  <form [formGroup]="mathForm">
+    {{ a }} + {{ b }} =
 
-  <input formControlName="answer" />
-</form>
-
-<hr />
-<div>Form is Valid: {{ mathForm.valid }}</div>
-<div>Form value: {{ mathForm.value | json }}</div>
-<div>Form Erros: {{ mathForm.errors | json }}</div>
+    <input formControlName="answer" />
+  </form>
+  {{ secondsPerSoulution | number: "1.1-3" }}
+  <hr />
+  <div>Form is Valid: {{ mathForm.valid }}</div>
+  <div>Form value: {{ mathForm.value | json }}</div>
+  <div>Form Erros: {{ mathForm.errors | json }}</div>
+</div>
 
 <!--mathForm.value.a or mathForm.get('a').value or mathForm.controls.a.value
   or use set/get

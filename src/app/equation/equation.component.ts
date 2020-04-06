@@ -9,6 +9,7 @@ import { delay, filter } from "rxjs/operators";
   styleUrls: ["./equation.component.css"],
 })
 export class EquationComponent implements OnInit {
+  secondsPerSoulution = 0;
   mathForm = new FormGroup(
     {
       a: new FormControl(this.randomNumber()),
@@ -28,12 +29,19 @@ export class EquationComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const startTime = new Date();
+    let numberSolved = 0;
+
     this.mathForm.statusChanges
       .pipe(
         filter((value) => value === "VALID"),
         delay(100)
       )
       .subscribe(() => {
+        numberSolved++;
+        this.secondsPerSoulution =
+          (new Date().getTime() - startTime.getTime()) / numberSolved / 1000;
+
         /*        if (value === "INVALID") {
           return;
         } */
