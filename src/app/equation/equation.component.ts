@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, AbstractControl } from "@angular/forms";
 import { MathValidators } from "../math-validators";
+import { delay, filter } from "rxjs/operators";
 
 @Component({
   selector: "app-equation",
@@ -27,26 +28,31 @@ export class EquationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.mathForm.statusChanges.subscribe((value) => {
-      if (value === "INVALID") {
-        return;
-      }
-      /*  this.mathForm.controls.a.setValue(this.randomNumber());
+    this.mathForm.statusChanges
+      .pipe(
+        filter((value) => value === "VALID"),
+        delay(100)
+      )
+      .subscribe(() => {
+        /*        if (value === "INVALID") {
+          return;
+        } */
+        /*  this.mathForm.controls.a.setValue(this.randomNumber());
       this.mathForm.controls.b.setValue(this.randomNumber());
       this.mathForm.controls.answer.setValue(""); */
-      // Note - use setValue on a from when you want to update all the controls on the form, else it will fail
-      this.mathForm.setValue({
-        a: this.randomNumber(),
-        b: this.randomNumber(),
-        answer: "",
-      });
+        // Note - use setValue on a from when you want to update all the controls on the form, else it will fail
+        this.mathForm.setValue({
+          a: this.randomNumber(),
+          b: this.randomNumber(),
+          answer: "",
+        });
 
-      //to update particular values
-      /*      this.mathForm.patchValue({
+        //to update particular values
+        /*      this.mathForm.patchValue({
         b: this.randomNumber(),
         answer: "",
       }); */
-    });
+      });
   }
 
   randomNumber() {
