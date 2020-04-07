@@ -1,11 +1,11 @@
 <form [formGroup]="mathForm">
   <div class="equation">{{ a }} + {{ b }} =</div>
-
-  <input formControlName="answer" />
+  <input appAnswerHighlight formControlName="answer" />
 </form>
 <div class="stats">
   {{ secondsPerSoulution | number: "1.1-3" }}
 </div>
+
 <!--  <hr />
   <div>Form is Valid: {{ mathForm.valid }}</div>
   <div>Form value: {{ mathForm.value | json }}</div>
